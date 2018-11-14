@@ -25,31 +25,20 @@ module.exports = function(app) {
                 if (i === friends[friend].scores.length-1) {
                     scoreArray.push(totalDifference);
                 }
-                // // OLD KEEPING IN CASE IT'S NEEDED
-                // // Push the result to an array so that it can be added together later
-                // scoreComparison.push(scoreDiff);
-                // // Check if for loop is on last iteration
-                // if (i === friend.score.length) {
-                //     // Add up the all the score differences
-                //     for (var i = 0; i < scoreComparison.length; i++) {
-                //         totalDifference += scoreComparison[i];
-                //     }
-                // }
             }
         }
         // Find the smallest difference
         bestMatchNum = Math.min.apply(null, scoreArray);
-        console.log("bestMatchNum: " + bestMatchNum);
-        console.log(scoreArray);
         // Find the location of the smallest difference in the array
         for (i=0; i < scoreArray.length; i++) {
             if (bestMatchNum === scoreArray[i]) {
                 bestMatch = i;
-                console.log("Loop Best Match: " + bestMatch);
             } 
         }
         // Send the bestmatch data
-        console.log("bestMatch: " + bestMatch)
         res.json(friends[bestMatch]);
+
+        // Push the new friend
+        friends.push(req.body);
     })
 }
